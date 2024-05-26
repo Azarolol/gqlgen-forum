@@ -6,7 +6,7 @@ CREATE TABLE IF NOT EXISTS Posts (
 	allows_comments bool NOT NULL DEFAULT false
 );
 
-CREATE TABLE ID NOT EXISTS Comments (
+CREATE TABLE IF NOT EXISTS Comments (
 	id int PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
 	on_post bool NOT NULL DEFAULT false,
 	comment_on int NOT NULL,

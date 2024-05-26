@@ -2,6 +2,7 @@ package db
 
 import (
 	"fmt"
+	"log"
 	"sort"
 	"strconv"
 
@@ -239,7 +240,7 @@ func (ldb *localDB) selectCommentWithID(input string) (*model.Comment, error) {
 func Connect(opts pg.Options) *pgDB {
 	db := pg.Connect(&opts)
 	if _, DBStatus := db.Exec("SELECT 1"); DBStatus != nil {
-		panic("PostgreSQL is down")
+		log.Fatalf("PostgreSQL is down %v", DBStatus)
 	}
 	return &pgDB{db}
 }

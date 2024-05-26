@@ -2,8 +2,10 @@ package config
 
 import (
 	"log"
+	"os"
+	"strings"
 
-	"github.com/BurntSushi/toml"
+	"github.com/joho/godotenv"
 )
 
 type Config struct {
@@ -15,10 +17,19 @@ type Config struct {
 }
 
 func ParseConfig(path string) *Config {
-	var config Config
-	_, err := toml.DecodeFile(path, &config)
+	err := godotenv.Load(path)
 	if err != nil {
 		log.Fatal("error parsing config:", err)
 	}
-	return &config
+	ifPg := true
+	if strings.ToLower(os.Getenv("IF_PG")) == "false" {
+		ifPg = false
+	}
+	return &Config{
+		Port:       os.Getenv("PORT"),
+		IfPg:       ifPg,
+		PgUser:     os.Getenv("PG_USER"),
+		PgPassword: os.Getenv("PG_PASSWORD"),
+		PgDatabase: os.Getenv("PG_DATABASE"),
+	}
 }
