@@ -1,19 +1,25 @@
 **Simple forum using Golang, GraphQL and PostgreSQL (optional)**
 
+
 List of available queries:
 
-getPostsPage(limit: Int = 10, offset: Int = 0): [Post]
+*getPostsPage(limit: Int = 10, offset: Int = 0): [Post]*
 
-getPostWithComments(input: ID!, limit: Int = 10, offset: Int = 0) : PostWithComments
+*getPostWithComments(input: ID!, limit: Int = 10, offset: Int = 0) : PostWithComments*
+
 
 List of available mutations:
 
-createPost(input: NewPost!): Post!
+*createPost(input: NewPost!): Post!*
 
-addCommentOnPost(input: NewComment!): Comment!
+*addCommentOnPost(input: NewComment!): Comment!*
 
-addCommentOnComment(input: NewComment!): Comment!
+*addCommentOnComment(input: NewComment!): Comment!*
+
 
 **To build and launch docker:**
 
-docker-compose up --build
+*docker-compose up --build*
+
+
+For in-memory mode set IF_PG in .env file to false
