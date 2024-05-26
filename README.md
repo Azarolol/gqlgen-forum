@@ -13,3 +13,7 @@ createPost(input: NewPost!): Post!
 addCommentOnPost(input: NewComment!): Comment!
 
 addCommentOnComment(input: NewComment!): Comment!
+
+**To build and launch docker:**
+
+docker-compose up --build
