@@ -1,0 +1,49 @@
+type Post {
+  id: ID!
+  author: String!
+  header: String!
+  body: String!
+  allowsComments: Boolean!
+}
+
+type PostWithComments {
+  post : Post
+  comments: [CommentWithComments]
+}
+
+type CommentWithComments {
+  comment: Comment
+  comments: [CommentWithComments]
+}
+
+type Comment {
+  id: ID!
+  onPost: Boolean!
+  commentOn: ID!
+  author: String!
+  body: String!
+}
+
+type Query {
+  getPostsPage(limit: Int = 10, offset: Int = 0): [Post]
+  getPostWithComments(input: ID!, limit: Int = 10, offset: Int = 0) : PostWithComments
+}
+
+input NewPost {
+  header: String!
+  body: String!
+  author: String!
+  allowsComments: Boolean!
+}
+
+input NewComment {
+  commentOn: ID!
+  author: String!
+  body: String!
+}
+
+type Mutation {
+  createPost(input: NewPost!): Post!
+  addCommentOnPost(input: NewComment!): Comment!
+  addCommentOnComment(input: NewComment!): Comment!
+}
